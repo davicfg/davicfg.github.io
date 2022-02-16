@@ -92,8 +92,21 @@ function inicializaInterface(){
 
 }
 function atualizaInterface(){
-  listarBens().then((result) => {
-    console.log("🚀 ~ file: script.js ~ line 65 ~ listarBens ~ result", result)
+  listarBens().then((bens) => {
+    console.log("🚀 ~ file: script.js ~ line 96 ~ listarBens ~ result", bens)
+    let card = document.querySelector("#card-modelo");
+    bens.forEach((ben) => {
+      let clone = card.cloneNode(true);
+      clone.querySelector("#btn-fazer-lance").setAttribute("onClick", `fazerLance(${parseInt(ben.id)})`);
+      clone.querySelector(".card-title").innerText = ben.id;
+      clone.querySelector("#ultimo-apostador").innerText = `${ben.ultimoApostador.slice(15)}`;
+      clone.querySelector("#ultimo-lance").innerText = `Valor atual: ${parseInt(ben.lancheAtual)/umEtherEmWei} ETH`;
+      clone.id = `ben-${ben.id}`;
+      clone.hidden = '';
+      clone.classList.add('lista-bens');
+      card.after(clone);
+    })
+    
   });
 }
 

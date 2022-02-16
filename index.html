@@ -16,17 +16,17 @@
 <body class="bg-dark">
   <h1 class="text-white">Leilão do faustão</h1>
   <div class="row">
-    <div class="col-md order-md mb">
-      <div class="card" style="width: 18rem;" id="bem-0">
-        <div class="card-body">
-          <h5 class="card-title">ID do BEM: 0</h5>
-          <p class="card-text">Lance atual ETHER.</p>
-          <p class="card-text"><small class="text-muted">ultimoApostador</small></p>
+    <div class="col-md order-md mb" id="lista-bens">
+      <div class="card" style="width: 18rem;" id="card-modelo" hidden>
+        <div class="card-body" >
+          <h5 class="card-title"></h5>
+          <p class="card-text" id="ultimo-lance"></p>
+          <p class="card-text"><small class="text-muted" id="ultimo-apostador"></small></p>
           <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" id="valor" required>
             <div class="input-group-prepend">
-              <button class="btn btn-outline-secondary" type="button" onclick="fazerLance(0)">Fazer um lance</button>
+              <button class="btn btn-outline-secondary" type="button" id="btn-fazer-lance">Fazer um lance</button>
             </div>
-            <input type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" id="valor">
           </div>
         </div>
       </div>
