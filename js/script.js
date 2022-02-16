@@ -97,6 +97,10 @@ function atualizaInterface(){
     let card = document.querySelector("#card-modelo");
     bens.forEach((ben) => {
       let clone = card.cloneNode(true);
+      let elm = document.getElementById(`ben-${ben.id}`);
+      if(elm != null){
+        elm.remove();
+      }
       clone.querySelector("#btn-fazer-lance").setAttribute("onClick", `fazerLance(${parseInt(ben.id)})`);
       clone.querySelector(".card-title").innerText = ben.id;
       clone.querySelector("#ultimo-apostador").innerText = `${ben.ultimoApostador.slice(15)}`;
