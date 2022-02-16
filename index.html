@@ -13,8 +13,24 @@
     <link rel="stylesheet" href="style/style.css" />
   <title>Leilão dapp</title>
 </head>
-<body>
-  <h1>Leilão do faustão</h1>
+<body class="bg-dark">
+  <h1 class="text-white">Leilão do faustão</h1>
+  <div class="row">
+    <div class="col-md order-md mb">
+      <div class="card" style="width: 18rem;" id="bem-0">
+        <div class="card-body">
+          <h5 class="card-title">ID do BEM: 0</h5>
+          <p class="card-text">Lance atual ETHER.</p>
+          <p class="card-text"><small class="text-muted">ultimoApostador</small></p>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-secondary" type="button" onclick="fazerLance(0)">Fazer um lance</button>
+            </div>
+            <input type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" id="valor">
+          </div>
+        </div>
+      </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="js/abi.js"></script>
   <script src="js/script.js"></script>

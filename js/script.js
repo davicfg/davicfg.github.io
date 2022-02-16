@@ -1,5 +1,5 @@
 // ENDEREÇO EHTEREUM DO CONTRATO
-var contractAddress = "0xA651A2919b4D9deE39CDeC91770D5C169cBB1BED";
+var contractAddress = "0xd25018Ee977f7E7024D8411F216a50aF62422Be8";
 const umEtherEmWei = 1000000000000000000
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -62,12 +62,20 @@ function listarBens(){
   return DApp.contracts.Leilao.methods.listarBens().call();
 }
 
+function listarBen(id){
+  return DApp.contracts.Leilao.methods.listarBen(id).call();
+}
+
 // *** MÉTODOS (de escrita) DO CONTRATO *** //
 
-function fazerLance(){
-  const valor = umEtherEmWei * 0.1;
-  const id = 0;
-  return DApp.contracts.Leilao.methods.fazerLance(id).send({from: DApp.account, value: valor}).then(atualizaInterface)
+function fazerLance(id){
+  const valor = umEtherEmWei * parseFloat(document.querySelector(`#bem-${id}`).querySelector("#valor").value);
+  listarBen(id).then((result) => {
+    console.log("🚀 ~ file: script.js ~ line 74 ~ listarBen ~ result", result)
+    if(validarLance(parseInt(result.lancheAtual), valor)){
+      return DApp.contracts.Leilao.methods.fazerLance(id).send({from: DApp.account, value: valor}).then(atualizaInterface)
+    }
+  });
 }
 
 function criarBem(){
@@ -95,4 +103,13 @@ function eventoNovoBem(evento){
 
 function eventoNovoLonce(evento){
   console.log("eventoNovoLonce",evento);
+}
+
+function validarLance(valorAtual, valorAposta){
+  console.log("🚀 ~ file: script.js ~ line 109 ~ validarLance ~ valorAtual, valorAposta", valorAtual, valorAposta)
+  if(valorAtual > valorAposta){
+    alert("Valor da aposta é inferior ao valor atual do bem");
+    return false;
+  }
+  return true;
 }

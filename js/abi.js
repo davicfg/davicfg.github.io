@@ -76,6 +76,54 @@ var abi =
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "listarBen",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ultimoBlocoLance",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lancheAtual",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "ultimoApostador",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "vendido",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct Leilao.Bem",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
 		"name": "listarBens",
 		"outputs": [
