@@ -1,6 +1,6 @@
 // ENDEREÇO EHTEREUM DO CONTRATO
 var contractAddress = "0xA651A2919b4D9deE39CDeC91770D5C169cBB1BED";
-
+const umEtherEmWei = 1000000000000000000
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
 function onDocumentLoad() {
@@ -56,23 +56,43 @@ const DApp = {
   },
 };
 
-// *** MÉTODOS (de consulta - view) DO CONTRATO ** //
+// *** MÉTODOS (de consulta - view) DO CONTRATO *** //
 
 function listarBens(){
   return DApp.contracts.Leilao.methods.listarBens().call();
 }
 
+// *** MÉTODOS (de escrita) DO CONTRATO *** //
+
+function fazerLance(){
+  const valor = umEtherEmWei * 0.1;
+  const id = 0;
+  return DApp.contracts.Leilao.methods.fazerLance(id).send({from: DApp.account, value: valor}).then(atualizaInterface)
+}
+
+function criarBem(){
+  return DApp.contracts.Leilao.methods.criarBem()
+    .send({from: DApp.account}).then(atualizaInterface);
+}
+
+// *** ATUALIZAÇÃO DO HTML *** //
 
 function inicializaInterface(){
+  atualizaInterface();
+  DApp.contracts.Leilao.events.novoBem((error, event) => eventoNovoBem([event]));  
+  DApp.contracts.Leilao.events.novoLonce((error, event) => eventoNovoLonce([event]));  
+
+}
+function atualizaInterface(){
   listarBens().then((result) => {
     console.log("🚀 ~ file: script.js ~ line 65 ~ listarBens ~ result", result)
   });
-  DApp.contracts.Leilao.events.novoBem((error, event) => eventoNovoBem([event]));  
-
 }
 
-// *** MÉTODOS (de escrita) DO CONTRATO ** //
-
 function eventoNovoBem(evento){
-  console.log(evento);
+  console.log("eventoNovoBem",evento);
+}
+
+function eventoNovoLonce(evento){
+  console.log("eventoNovoLonce",evento);
 }
