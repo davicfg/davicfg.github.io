@@ -30,11 +30,11 @@ contract Leilao is Mortal{
     function listarBens() public view returns(Bem[] memory){
         return bens;
     }
-
-    function listarBen(uint id) public view returns(Bem memory){
+    //OK
+    function listarBem(uint id) public view returns(Bem memory){
         return bens[id];
     }
-
+    //OK
     function fazerLance(uint id) public payable{
         require(id>=0 && id<ultimoID, "id invalidado");
         require(msg.value > bens[id].lancheAtual, "valor do lance menor que o valor da ultima aposta");

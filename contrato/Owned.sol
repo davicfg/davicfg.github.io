@@ -11,6 +11,9 @@ contract Owned{
         require(msg.sender == owner, "so o dono do contrato pode fazer essa acao!");
         _;
     }
+    function isOwner() public view returns(address){
+        return owner;
+    }
 }
 
 contract Mortal is Owned{
