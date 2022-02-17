@@ -115,8 +115,6 @@ function atualizaInterface(){
   });
   document.getElementById("btnNovoBem").style.display = "none";
   ehDono().then((result) => {
-    console.log(result)
-    console.log(DApp.account);
     if (parseInt(DApp.account) == parseInt(result)) {
       document.getElementById("btnNovoBem").onclick = criarBem;
       document.getElementById("btnNovoBem").style.display = "block";
@@ -135,7 +133,7 @@ function eventoNovoLonce(evento){
 }
 
 function validarLance(valorAtual, valorAposta){
-  if(valorAtual > valorAposta){
+  if(!(valorAposta > valorAtual && valorAposta !== valorAtual)){
     alert("Valor da aposta é inferior ao valor atual do bem");
     return false;
   }
