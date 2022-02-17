@@ -12,10 +12,16 @@
     />
     <link rel="stylesheet" href="style/style.css" />
   <title>Leilão dapp</title>
+ 
 </head>
 <body class="bg-dark">
-  <h1 class="text-white">Leilão do faustão</h1>
+
   <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-md-4 mb-8">
+        <h1 class="text-white" >Leilão do faustão</h1>
+      </div>
+  </div>
     <div class="row" id="lista-bens">
       <div class="col-sm-12 col-md-4 mb-10" id="card-modelo" hidden>
         <div class="card" style="width: 18rem;" >
@@ -33,6 +39,11 @@
         </div>
     </div>
   </div>
+  </div>
+  <div style="float: right;">
+    <button type="button" id="btnNovoBem" class="btn btn-info btn-lg btn-block">
+      Novo Bem
+    </button>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="js/abi.js"></script>

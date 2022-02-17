@@ -1,5 +1,5 @@
 // ENDEREÇO EHTEREUM DO CONTRATO
-var contractAddress = "0xd25018Ee977f7E7024D8411F216a50aF62422Be8";
+var contractAddress = "0x51A27e0e1c1E4bB7100A67976DF9D58A30D40C0e";
 const umEtherEmWei = 1000000000000000000
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -62,16 +62,19 @@ function listarBens(){
   return DApp.contracts.Leilao.methods.listarBens().call();
 }
 
-function listarBen(id){
-  return DApp.contracts.Leilao.methods.listarBen(id).call();
+function listarBem(id){
+  return DApp.contracts.Leilao.methods.listarBem(id).call();
+}
+
+function ehDono(){
+  return DApp.contracts.Leilao.methods.isOwner().call();
 }
 
 // *** MÉTODOS (de escrita) DO CONTRATO *** //
 
 function fazerLance(id){
   const valor = umEtherEmWei * parseFloat(document.querySelector(`#bem-${id}`).querySelector("#valor").value);
-  listarBen(id).then((result) => {
-    console.log("🚀 ~ file: script.js ~ line 74 ~ listarBen ~ result", result)
+  listarBem(id).then((result) => {
     if(validarLance(parseInt(result.lancheAtual), valor)){
       return DApp.contracts.Leilao.methods.fazerLance(id).send({from: DApp.account, value: valor}).then(atualizaInterface)
     }
@@ -93,37 +96,45 @@ function inicializaInterface(){
 }
 function atualizaInterface(){
   listarBens().then((bens) => {
-    console.log("🚀 ~ file: script.js ~ line 96 ~ listarBens ~ result", bens)
     let card = document.querySelector("#card-modelo");
-    bens.forEach((ben) => {
+    bens.forEach((bem) => {
       let clone = card.cloneNode(true);
-      let elm = document.getElementById(`ben-${ben.id}`);
+      let elm = document.getElementById(`bem-${bem.id}`);
       if(elm != null){
         elm.remove();
       }
-      clone.querySelector("#btn-fazer-lance").setAttribute("onClick", `fazerLance(${parseInt(ben.id)})`);
-      clone.querySelector(".card-title").innerText = ben.id;
-      clone.querySelector("#ultimo-apostador").innerText = `${ben.ultimoApostador.slice(15)}`;
-      clone.querySelector("#ultimo-lance").innerText = `Valor atual: ${parseInt(ben.lancheAtual)/umEtherEmWei} ETH`;
-      clone.id = `ben-${ben.id}`;
+      clone.querySelector("#btn-fazer-lance").setAttribute("onClick", `fazerLance(${parseInt(bem.id)})`);
+      clone.querySelector(".card-title").innerText = bem.id;
+      clone.querySelector("#ultimo-apostador").innerText = `${bem.ultimoApostador.slice(15)}`;
+      clone.querySelector("#ultimo-lance").innerText = `Valor atual: ${parseInt(bem.lancheAtual)/umEtherEmWei} ETH`;
+      clone.id = `bem-${bem.id}`;
       clone.hidden = '';
       clone.classList.add('lista-bens');
       card.after(clone);
-    })
-    
+    })  
+  });
+  document.getElementById("btnNovoBem").style.display = "none";
+  ehDono().then((result) => {
+    console.log(result)
+    console.log(DApp.account);
+    if (parseInt(DApp.account) == parseInt(result)) {
+      document.getElementById("btnNovoBem").onclick = criarBem;
+      document.getElementById("btnNovoBem").style.display = "block";
+    }
   });
 }
 
 function eventoNovoBem(evento){
   console.log("eventoNovoBem",evento);
+  atualizaInterface()
 }
 
 function eventoNovoLonce(evento){
   console.log("eventoNovoLonce",evento);
+  atualizaInterface()
 }
 
 function validarLance(valorAtual, valorAposta){
-  console.log("🚀 ~ file: script.js ~ line 109 ~ validarLance ~ valorAtual, valorAposta", valorAtual, valorAposta)
   if(valorAtual > valorAposta){
     alert("Valor da aposta é inferior ao valor atual do bem");
     return false;

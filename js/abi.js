@@ -66,6 +66,21 @@ var abi =
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [],
+		"name": "isOwner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [],
 		"name": "jobArrematarBens",
@@ -83,7 +98,7 @@ var abi =
 				"type": "uint256"
 			}
 		],
-		"name": "listarBen",
+		"name": "listarBem",
 		"outputs": [
 			{
 				"components": [
