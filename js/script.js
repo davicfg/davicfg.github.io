@@ -1,5 +1,5 @@
 // ENDEREÇO EHTEREUM DO CONTRATO
-var contractAddress = "0xD181313162A8eaC339DC50F9B2C84B882A9BC7Ea";
+var contractAddress = "0xf57921C455C451c9b4CDfB725919Caa13c4F2c12";
 const umEtherEmWei = 1000000000000000000
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
