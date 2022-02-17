@@ -15,15 +15,24 @@
  
 </head>
 <body class="bg-dark">
-
+  <div style="float: right;">
+    <button type="button" id="btnNovoBem" class="btn btn-info btn-lg btn-block">
+      Novo Bem
+    </button>
+  </div>
+  <div style="float: right;margin-right: 10px;">
+    <button type="button" id="btnJob" class="btn btn-warning btn-lg btn-block">
+      Bater o martelo!
+    </button>
+  </div>
   <div class="container">
     <div class="row">
-      <div class="col-sm-8 col-md-4 mb-8">
-        <h1 class="text-white" >Leilão do faustão</h1>
+      <div class="col-sm-10 col-md-4 mb-8">
+        <h1 class="text-white" >Leilão DApp</h1>
       </div>
   </div>
     <div class="row" id="lista-bens">
-      <div class="col-sm-12 col-md-4 mb-10" id="card-modelo" hidden>
+      <div class="col-sm-12 col-md-4 mb-10" id="card-modelo" hidden style="margin-bottom: 20px;">
         <div class="card" style="width: 18rem;" >
           <img class="card-img-top" src="https://random.imagecdn.app/280/180" alt="Card image cap">
           <div class="card-body" >
@@ -41,16 +50,7 @@
     </div>
   </div>
   </div>
-  <div style="float: right;">
-    <button type="button" id="btnNovoBem" class="btn btn-info btn-lg btn-block">
-      Novo Bem
-    </button>
-  </div>
-  <div style="float: right;margin-right: 10px;">
-    <button type="button" id="btnJob" class="btn btn-warning btn-lg btn-block">
-      Bater o martelo!
-    </button>
-  </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="js/abi.js"></script>
   <script src="js/script.js"></script>
