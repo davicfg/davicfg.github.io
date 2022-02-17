@@ -1,5 +1,5 @@
 // ENDEREÇO EHTEREUM DO CONTRATO
-var contractAddress = "0x51A27e0e1c1E4bB7100A67976DF9D58A30D40C0e";
+var contractAddress = "0xD181313162A8eaC339DC50F9B2C84B882A9BC7Ea";
 const umEtherEmWei = 1000000000000000000
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -86,6 +86,9 @@ function criarBem(){
     .send({from: DApp.account}).then(atualizaInterface);
 }
 
+function jobArrematarBens(){
+  return DApp.contracts.Leilao.methods.jobArrematarBens().send({from: DApp.account}).then(atualizaInterface);
+}
 // *** ATUALIZAÇÃO DO HTML *** //
 
 function inicializaInterface(){
@@ -96,8 +99,12 @@ function inicializaInterface(){
 }
 function atualizaInterface(){
   listarBens().then((bens) => {
+    console.log("🚀 ~ file: script.js ~ line 103 ~ listarBens ~ bens", bens)
     let card = document.querySelector("#card-modelo");
     bens.forEach((bem) => {
+      if(bem.vendido){
+        return;
+      }
       let clone = card.cloneNode(true);
       let elm = document.getElementById(`bem-${bem.id}`);
       if(elm != null){
@@ -114,10 +121,13 @@ function atualizaInterface(){
     })  
   });
   document.getElementById("btnNovoBem").style.display = "none";
+  document.getElementById("btnJob").style.display = "none";
   ehDono().then((result) => {
     if (parseInt(DApp.account) == parseInt(result)) {
       document.getElementById("btnNovoBem").onclick = criarBem;
       document.getElementById("btnNovoBem").style.display = "block";
+      document.getElementById("btnJob").onclick = jobArrematarBens;
+      document.getElementById("btnJob").style.display = "block";
     }
   });
 }
